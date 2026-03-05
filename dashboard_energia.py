@@ -232,6 +232,7 @@ try:
             resumen_display['Mes'] = resumen_display['Mes'].dt.strftime('%b %Y')
             resumen_display['Consumo Total'] = resumen_display['Consumo Total'].apply(lambda x: f"{x:,.0f} kWh")
             resumen_display['$ Total'] = resumen_display['$ Total'].apply(formatear_moneda)
+            resumen_display = resumen_display.rename(columns={'$ Total': '$ Monto'})
             st.dataframe(resumen_display, use_container_width=True, hide_index=True)
         
         with col_grafico:
@@ -567,5 +568,6 @@ except Exception as e:
     import traceback
 
     st.error(traceback.format_exc())
+
 
 
