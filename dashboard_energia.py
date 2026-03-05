@@ -241,7 +241,7 @@ try:
             
             fig = go.Figure()
             fig.add_trace(go.Bar(x=df_grafico['Mes_str'], y=df_grafico['Consumo Total'], name='Consumo Total (kWh)', marker=dict(color='#1f77b4'), yaxis='y1'))
-            fig.add_trace(go.Scatter(x=df_grafico['Mes_str'], y=df_grafico['$ Total'], name='$ Total', marker=dict(color='#ff7f0e', size=8), yaxis='y2', mode='lines+markers', line=dict(width=3)))
+            fig.add_trace(go.Scatter(x=df_grafico['Mes_str'], y=df_grafico['$ Total'], name='$ Monto', marker=dict(color='#ff7f0e', size=8), yaxis='y2', mode='lines+markers', line=dict(width=3)))
             fig.update_layout(title="Consumo vs Facturación", xaxis=dict(title="Mes"), yaxis=dict(title="Consumo Total (kWh)", title_font=dict(color='#1f77b4')), yaxis2=dict(title="Facturación ($)", title_font=dict(color='#ff7f0e'), overlaying='y', side='right'), height=400, hovermode='x unified')
             st.plotly_chart(fig, use_container_width=True)
     
@@ -567,4 +567,5 @@ except Exception as e:
     import traceback
 
     st.error(traceback.format_exc())
+
 
