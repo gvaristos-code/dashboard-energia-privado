@@ -160,13 +160,14 @@ try:
         df = cargar_datos(tmp_path)
         st.sidebar.success("✅ Archivo cargado desde upload")
     else:
-        if os.path.exists(RUTA_ARCHIVO_BASE):
-            df = cargar_datos(RUTA_ARCHIVO_BASE)
-            st.sidebar.success(f"✅ Base cargada desde: {RUTA_ARCHIVO_BASE}")
-        else:
-            st.error(f"❌ No se encontró el archivo en: {RUTA_ARCHIVO_BASE}")
-            st.info("💡 Opciones:\n1. Verifica que la ruta sea correcta\n2. Desactiva 'Usar base local'\n3. Carga un archivo manualmente")
-            st.stop()
+        import base64
+        import io
+        datos_b64 = st.secrets["datos_excel_b64"]
+        datos_bytes = base64.b64decode(datos_b64)
+        df = pd.read_excel(io.BytesIO(datos_bytes))
+        df['Mes'] = pd.to_datetime(df['Mes'])
+        df = df.sort_values('Mes').reset_index(drop=True)
+        st.sidebar.success("✅ Base cargada desde Secrets")
     
     meses_disponibles = sorted(df['Mes'].unique())
     tipos_cliente = sorted(df['TIPO CLIENTE'].unique())
@@ -566,3 +567,4 @@ except Exception as e:
     import traceback
 
     st.error(traceback.format_exc())
+
