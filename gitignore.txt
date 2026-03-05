@@ -1,7 +1,0 @@
-*.xlsx
-*.csv
-*.db
-.env
-secrets.toml
-__pycache__/
-.streamlit/secrets.toml
