@@ -98,8 +98,8 @@ def verificar_credenciales():
             
             with col_boton1:
                 if st.button("🚀 Ingresar", use_container_width=True):
-                    USUARIO_CORRECTO = "admin"
-                    CONTRASENA_CORRECTA = "energia2024"
+                    USUARIO_CORRECTO = st.secrets["usuario"]
+                    CONTRASENA_CORRECTA = st.secrets["contrasena"]
                     
                     if usuario == USUARIO_CORRECTO and contrasena == CONTRASENA_CORRECTA:
                         st.session_state.autenticado = True
@@ -109,7 +109,7 @@ def verificar_credenciales():
                         st.error("❌ Usuario o contraseña incorrectos")
             
             with col_boton2:
-                st.info("📝 Demo: admin / energia2024")
+                st.info("📝 Demo: demo / demo")
         
         st.stop()
 
@@ -564,4 +564,5 @@ try:
 except Exception as e:
     st.error(f"❌ Error: {str(e)}")
     import traceback
+
     st.error(traceback.format_exc())
